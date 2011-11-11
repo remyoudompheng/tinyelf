@@ -1,5 +1,5 @@
 ARCH = $(shell arch)
-CFLAGS = -Os -std=c99 -pipe -Wall
+CFLAGS = -O2 -march=native -std=c99 -pipe -Wall
 CPPFLAGS = -Iinclude
 LDFLAGS = -s
 
@@ -28,4 +28,4 @@ stdlib.a: $(LIB_OBJS)
 	ar cru stdlib.a $(LIB_OBJS)
 
 clean:
-	rm -f main *.o lib/*.o stdlib.a
+	rm -f main mandelbrot *.o lib/*.o stdlib.a
