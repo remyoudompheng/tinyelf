@@ -17,17 +17,16 @@ int test(c1, c2) double c1, c2; {
 double refx = .44;
 double refy = .374;
 
+#define ROWS 30
+#define COLS 80
+
+const char *header = "\r\e[30A";
+
 int main() {
   char buffer[2048];
   int pos = 0;
   double scale = 2;
 start:
-  pos = 0;
-  // Erase screen
-  buffer[pos++] = '\e';
-  buffer[pos++] = '[';
-  buffer[pos++] = '2';
-  buffer[pos++] = 'J';
   for(int i = 0; i < 30; i++) {
     for(int j = 0; j < 80; j++) {
       double x = refx + (j - 40.0) / 20.0 * scale;
@@ -39,6 +38,9 @@ start:
   write(1, buffer, pos);
   usleep(100000);
   scale *= 0.98;
+  // Rewind cursor
+  pos = 0;
+  for (int i = 0; i < 6; i++) buffer[pos++] = header[i];
   goto start;
   return 0;
 }
