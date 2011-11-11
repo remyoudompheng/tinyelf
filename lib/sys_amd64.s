@@ -3,10 +3,7 @@
 
 // write(int fd, char *data, int data_len)
 write:
-        // Linux amd64
+        // fd in %edi, data in %rsi, data_len in %edx
         movl $1, %eax
-        movl 8(%esp), %edi
-        movq 16(%esp), %esi
-        movl 24(%esp), %edx
-        int $0x80
+        syscall
         ret
