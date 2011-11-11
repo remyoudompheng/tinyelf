@@ -3,12 +3,14 @@ CFLAGS = -Os -std=c99 -pipe -Wall
 CPPFLAGS = -Iinclude
 LDFLAGS = -s
 
+LIB_OBJS = lib/time.o
+
 ifeq ($(ARCH), i386)
     CPPFLAGS += -DARCH=i386
-    LIB_OBJS = lib/skel.o lib/sys_i386.o
+    LIB_OBJS += lib/skel.o lib/sys_i386.o
 else
     CPPFLAGS += -DARCH=amd64
-    LIB_OBJS = lib/skel.o lib/sys_amd64.o
+    LIB_OBJS += lib/skel.o lib/sys_amd64.o
 endif
 
 all: main mandelbrot
@@ -20,7 +22,7 @@ mandelbrot: mandelbrot.o stdlib.a
 	ld $(LDFLAGS) -o mandelbrot mandelbrot.o stdlib.a
 
 %.o: %.s
-	$(CC) $(CPPFLAGS) -o $@ -c $<
+	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
 
 stdlib.a: $(LIB_OBJS)
 	ar cru stdlib.a $(LIB_OBJS)
