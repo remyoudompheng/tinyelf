@@ -1,11 +1,11 @@
-ARCH = i386
+ARCH = $(shell arch)
 CFLAGS = -Os -std=c99 -pipe -Wall
 CPPFLAGS = -Iinclude
 LDFLAGS = -s
 
 LIB_OBJS = lib/time.o
 
-ifeq ($(ARCH), i386)
+ifeq ($(ARCH), i686)
     CPPFLAGS += -DARCH=i386
     LIB_OBJS += lib/skel.o lib/sys_i386.o
 else

@@ -2,8 +2,8 @@
 #define SYS_H
 
 struct UTime {
-  int secs;
-  int usecs;
+  long secs;
+  long usecs;
 };
 
 int write(int fd, const char *buffer, int size);
