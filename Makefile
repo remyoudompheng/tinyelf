@@ -3,6 +3,10 @@ CFLAGS = -O2 -march=native -std=c99 -pipe -Wall
 CPPFLAGS = -Iinclude
 LDFLAGS = -s
 
+# DEBUG
+#CFLAGS = -pipe -ggdb3 -Wall -std=c99
+#LDFLAGS = 
+
 LIB_OBJS = lib/time.o
 
 ifeq ($(ARCH), i686)

@@ -25,32 +25,36 @@ int test(c1, c2) double c1, c2; {
 // double refx = 0.3245046418497685;
 // double refy = 0.04855101129280834;
 
-double refx = 0.3245046418497685;
-double refy = 0.04855101129280834;
+// double refx = 0.3245046418497685;
+// double refy = 0.04855101129280834;
+
+double refx = 0.3215000630401344;
+double refy = 0.04855009999999;
+
+char buffer[32768];
 
 int main() {
-  char buffer[2048];
   int pos = 0;
   double scale = 2;
   double x, y;
-start:
-  y = refy + scale;
-  for(int i = 0; i < ROWS; i++) {
-    x= refx - scale * ASPECT;
-    y -= 2 * scale / (double)(ROWS);
-    for(int j = 0; j < COLS; j++) {
-      x += 2 * scale / (double)(COLS) * ASPECT;
-      buffer[pos++] = test(x,y) ? '*' : ' ';
+  for(;;) {
+    y = refy + scale;
+    for(int i = 0; i < ROWS; i++) {
+      x= refx - scale * ASPECT;
+      y -= 2 * scale / (double)(ROWS);
+      for(int j = 0; j < COLS; j++) {
+        x += 2 * scale / (double)(COLS) * ASPECT;
+        buffer[pos++] = test(x,y) ? '*' : ' ';
+      }
+      buffer[pos++] = '\n';
     }
-    buffer[pos++] = '\n';
+    write(1, buffer, pos);
+    usleep(40000);
+    scale *= 0.95;
+    // Rewind cursor
+    pos = 0;
+    for (const char *p = header; *p; p++) buffer[pos++] = *p;
   }
-  write(1, buffer, pos);
-  usleep(40000);
-  scale *= 0.95;
-  // Rewind cursor
-  pos = 0;
-  for (int i = 0; i < 6; i++) buffer[pos++] = header[i];
-  goto start;
   return 0;
 }
 
