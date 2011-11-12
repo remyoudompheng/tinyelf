@@ -1,8 +1,8 @@
 #include <sys.h>
 
 void usleep(unsigned long usecs) {
-  struct UTime t;
+  struct NTime t;
   t.secs = usecs / 1000000;
-  t.usecs = usecs % 1000000;
-  select(0, 0, 0, 0, &t);
+  t.nsecs = 1000 * (usecs % 1000000);
+  nanosleep(&t, NULL);
 }

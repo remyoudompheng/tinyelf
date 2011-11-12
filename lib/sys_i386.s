@@ -22,3 +22,11 @@ select:
         int $0x80
         ret
 
+// nanosleep(timespec *t, timespec *rem)
+.globl nanosleep
+nanosleep:
+        movl $162, %eax
+        movl 4(%esp), %ebx
+        movl 8(%esp), %ecx
+        int $0x80
+        ret

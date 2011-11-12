@@ -21,3 +21,9 @@ select:
         syscall
         ret
 
+// nanosleep(timespec *t, timespec *rem)
+.globl nanosleep
+nanosleep:
+        movl $35, %eax
+        syscall
+        ret
