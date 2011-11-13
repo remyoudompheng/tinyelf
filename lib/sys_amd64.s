@@ -27,3 +27,12 @@ nanosleep:
         movl $35, %eax
         syscall
         ret
+
+// gettimeofday(timeval *t, timezone *tz)
+.globl gettimeofday
+gettimeofday:
+        movl $96, %eax
+        syscall
+        ret
+
+

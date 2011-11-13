@@ -6,3 +6,9 @@ void usleep(unsigned long usecs) {
   t.nsecs = 1000 * (usecs % 1000000);
   nanosleep(&t, NULL);
 }
+
+int64 utime() {
+  struct UTime t;
+  gettimeofday(&t, NULL);
+  return t.secs * 1000000 + t.usecs;
+}

@@ -30,3 +30,13 @@ nanosleep:
         movl 8(%esp), %ecx
         int $0x80
         ret
+
+// gettimeofday(timeval *t, timezone *tz)
+.globl gettimeofday
+gettimeofday:
+        movl $78, %eax
+        movl 4(%esp), %ebx
+        movl 8(%esp), %ecx
+        int $0x80
+        ret
+
