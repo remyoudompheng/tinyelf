@@ -1,13 +1,14 @@
 ARCH = $(shell arch)
-CFLAGS = -O2 -march=native -std=c99 -pipe -Wall
+CFLAGS = -O2 -march=native -std=c99 -pipe -Wall -Wconversion
 CPPFLAGS = -Iinclude
 LDFLAGS = -s
 
-# DEBUG
-#CFLAGS = -pipe -ggdb3 -Wall -std=c99
-#LDFLAGS = 
+ifdef DEBUG
+CFLAGS = -pipe -ggdb3 -Wall -std=c99
+LDFLAGS = 
+endif
 
-LIB_OBJS = lib/time.o
+LIB_OBJS = lib/time.o lib/int64.o
 
 ifeq ($(ARCH), i686)
     CPPFLAGS += -DARCH=i386
@@ -17,13 +18,16 @@ else
     LIB_OBJS += lib/skel.o lib/sys_amd64.o
 endif
 
-all: main mandelbrot
+all: main mandelbrot random
 
 main: main.o stdlib.a
-	ld $(LDFLAGS) -o main main.o stdlib.a
+	$(LD) $(LDFLAGS) -o main main.o stdlib.a
 
 mandelbrot: mandelbrot.o stdlib.a
-	ld $(LDFLAGS) -o mandelbrot mandelbrot.o stdlib.a
+	$(LD) $(LDFLAGS) -o mandelbrot mandelbrot.o stdlib.a
+
+random: random.o stdlib.a
+	$(LD) $(LDFLAGS) -o random random.o stdlib.a
 
 %.o: %.s
 	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
