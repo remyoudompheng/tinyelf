@@ -1,7 +1,7 @@
 #ifndef RANDOM_H
 #define RANDOM_H
 
-#include <sys.h>
+#include <types.h>
 
 typedef struct  {
   int64 seed;
