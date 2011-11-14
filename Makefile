@@ -8,7 +8,7 @@ CFLAGS = -pipe -ggdb3 -Wall -std=c99
 LDFLAGS = 
 endif
 
-LIB_OBJS = lib/time.o lib/int64.o
+LIB_OBJS = lib/time.o lib/int64.o lib/random.o
 
 ifeq ($(ARCH), i686)
     CPPFLAGS += -DARCH=i386
