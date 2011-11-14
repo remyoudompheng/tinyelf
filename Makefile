@@ -14,6 +14,8 @@ ifeq ($(ARCH), i686)
     CPPFLAGS += -DARCH=i386
     LIB_OBJS += lib/skel.o lib/sys_i386.o
 else
+    CFLAGS += -m64
+    LDFLAGS += -melf_x86_64
     CPPFLAGS += -DARCH=amd64
     LIB_OBJS += lib/skel.o lib/sys_amd64.o
 endif
