@@ -1,16 +1,5 @@
 #include <sys.h>
-
-static int64 seed;
-
-static void randinit() {
-  seed = utime();
-}
-
-static int64 randnext() {
-  seed = 0x5DEECE66D * seed + 0xB;
-  seed &= 0xffffffffffff;
-  return seed;
-}
+#include <random.h>
 
 static int itoa(int64 i, char *buffer) {
   int digits = 0;
@@ -31,13 +20,17 @@ static int itoa(int64 i, char *buffer) {
 
 int main() {
   char buffer[48];
+  RandGen g = randinit();
   int i, size;
   int64 n;
+  int buckets[19];
 
-  randinit();
-  for(i = 0; i < 30; i++) {
-    n = randnext();
-    size = itoa(n, buffer);
+  for(i = 0; i < 3000000; i++) {
+    n = randnext(&g);
+    buckets[n % 19] += 1;
+  }
+  for(i = 0; i < 19; i++) {
+    size = itoa(buckets[i], buffer);
     buffer[size] = '\n';
     write(1, buffer, size+1);
   }

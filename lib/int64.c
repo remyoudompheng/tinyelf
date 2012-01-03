@@ -34,9 +34,10 @@ static void quotrem64(a, b, q, r)
 #define ONE             (ONE_FOURTH * 4.0)
 
 uint64 __fixunsdfdi(double x) {
-  double upper = (x - ONE_HALF) / ONE;
+  double upper = x / ONE;
   uint64 result = (uint)upper;
   result <<= 32;
+  while(result > x) result -= (1<<32);
   x -= (double)result;
   result += (uint)x;
   return result;

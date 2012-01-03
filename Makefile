@@ -12,24 +12,18 @@ LIB_OBJS = lib/time.o lib/int64.o lib/random.o
 
 ifeq ($(ARCH), i686)
     CPPFLAGS += -DARCH=i386
-    LIB_OBJS += lib/skel.o lib/sys_i386.o
+    LIB_OBJS += lib/skel.o lib/i386/sys.o
 else
     CFLAGS += -m64
     LDFLAGS += -melf_x86_64
     CPPFLAGS += -DARCH=amd64
-    LIB_OBJS += lib/skel.o lib/sys_amd64.o
+    LIB_OBJS += lib/skel.o lib/amd64/sys.o
 endif
 
-all: main mandelbrot random
+all: main.bin mandelbrot.bin random.bin randomline.bin
 
-main: main.o stdlib.a
-	$(LD) $(LDFLAGS) -o main main.o stdlib.a
-
-mandelbrot: mandelbrot.o stdlib.a
-	$(LD) $(LDFLAGS) -o mandelbrot mandelbrot.o stdlib.a
-
-random: random.o stdlib.a
-	$(LD) $(LDFLAGS) -o random random.o stdlib.a
+%.bin: %.o stdlib.a
+	$(LD) $(LDFLAGS) -o $@ $< stdlib.a
 
 %.o: %.s
 	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
@@ -38,4 +32,4 @@ stdlib.a: $(LIB_OBJS)
 	ar cru stdlib.a $(LIB_OBJS)
 
 clean:
-	rm -f main mandelbrot *.o lib/*.o stdlib.a
+	rm -f *.bin *.o lib/*.o stdlib.a
