@@ -1,11 +1,13 @@
 ARCH = $(shell uname -m)
-CFLAGS = -O2 -march=native -std=c99 -pipe -Wall -Wconversion -fno-builtin
+# no-builtin: do not generate memcpy() calls
+# no-stack-protector: do not attempt to load SSP canary from TLS
+CFLAGS = -O2 -march=native -std=c99 -pipe -Wall -Wconversion -fno-builtin -fno-stack-protector
 CPPFLAGS = -Iinclude
 LDFLAGS = -s
 
 ifdef DEBUG
-CFLAGS = -pipe -ggdb3 -Wall -std=c99
-LDFLAGS = 
+CFLAGS += -O0 -g
+LDFLAGS =
 endif
 
 LIB_OBJS = lib/time.o lib/int64.o lib/random.o lib/stub.o
@@ -32,4 +34,4 @@ stdlib.a: $(LIB_OBJS)
 	ar cru stdlib.a $(LIB_OBJS)
 
 clean:
-	rm -f *.bin *.o lib/*.o stdlib.a
+	rm -f *.bin *.o lib/*.o lib/*/sys.o stdlib.a
