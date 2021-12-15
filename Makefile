@@ -1,4 +1,4 @@
-ARCH = $(shell arch)
+ARCH = $(shell uname -m)
 CFLAGS = -O2 -march=native -std=c99 -pipe -Wall -Wconversion
 CPPFLAGS = -Iinclude
 LDFLAGS = -s
