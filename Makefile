@@ -1,12 +1,16 @@
 ARCH = $(shell uname -m)
 # no-builtin: do not generate memcpy() calls
 # no-stack-protector: do not attempt to load SSP canary from TLS
-CFLAGS = -O2 -march=native -std=c99 -pipe -Wall -Wconversion -fno-builtin -fno-stack-protector
+CFLAGS = -Os -march=native -std=c99 -pipe -Wall -Wconversion \
+	 -fno-builtin \
+	 -fno-stack-protector \
+	 -fno-asynchronous-unwind-tables
 CPPFLAGS = -Iinclude
-LDFLAGS = -s
+LD ?= ld.gold
+LDFLAGS = -s -N
 
 ifdef DEBUG
-CFLAGS += -O0 -g
+CFLAGS += -O0 -g -fasynchronous-unwind-tables
 LDFLAGS =
 endif
 
