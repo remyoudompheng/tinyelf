@@ -19,6 +19,9 @@ LIB_OBJS = lib/time.o lib/int64.o lib/random.o lib/stub.o
 ifeq ($(ARCH), i686)
     CPPFLAGS += -DARCH=i386
     LIB_OBJS += lib/i386/skel.o lib/i386/sys.o
+else ifeq ($(ARCH), aarch64)
+    CPPFLAGS += -DARCH=aarch64
+    LIB_OBJS += lib/aarch64/skel.o lib/aarch64/sys.o
 else
     CFLAGS += -m64
     LDFLAGS += -melf_x86_64
