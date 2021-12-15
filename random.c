@@ -9,6 +9,7 @@ static int itoa(int64_t i, char *buffer) {
   if (i < 0) digits ++;
   p = buffer + digits;
   *p = '\0';
+  p--;
 
   for (n = i; n; n /= 10) {
     *p = '0' + (char)(n%10);
