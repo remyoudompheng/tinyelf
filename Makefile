@@ -1,5 +1,5 @@
 ARCH = $(shell uname -m)
-CFLAGS = -O2 -march=native -std=c99 -pipe -Wall -Wconversion
+CFLAGS = -O2 -march=native -std=c99 -pipe -Wall -Wconversion -fno-builtin
 CPPFLAGS = -Iinclude
 LDFLAGS = -s
 
@@ -8,7 +8,7 @@ CFLAGS = -pipe -ggdb3 -Wall -std=c99
 LDFLAGS = 
 endif
 
-LIB_OBJS = lib/time.o lib/int64.o lib/random.o
+LIB_OBJS = lib/time.o lib/int64.o lib/random.o lib/stub.o
 
 ifeq ($(ARCH), i686)
     CPPFLAGS += -DARCH=i386
