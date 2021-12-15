@@ -14,12 +14,12 @@ LIB_OBJS = lib/time.o lib/int64.o lib/random.o lib/stub.o
 
 ifeq ($(ARCH), i686)
     CPPFLAGS += -DARCH=i386
-    LIB_OBJS += lib/skel.o lib/i386/sys.o
+    LIB_OBJS += lib/i386/skel.o lib/i386/sys.o
 else
     CFLAGS += -m64
     LDFLAGS += -melf_x86_64
     CPPFLAGS += -DARCH=amd64
-    LIB_OBJS += lib/skel.o lib/amd64/sys.o
+    LIB_OBJS += lib/amd64/skel.o lib/amd64/sys.o
 endif
 
 all: main.bin mandelbrot.bin random.bin randomline.bin
