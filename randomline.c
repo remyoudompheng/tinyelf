@@ -47,7 +47,7 @@ int main() {
     int len = readline(buffer, 4096);
     if (len <= 0) break;
     lineno++;
-    int64 rnd = randnext(&g);
+    int64_t rnd = randnext(&g);
     if(rnd % lineno == 0) {
       copybytes(selected, buffer, len);
       selsize = len;

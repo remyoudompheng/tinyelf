@@ -1,18 +1,17 @@
 #ifndef TYPES_H
 #define TYPES_H
 
-#define NULL ((void*)0)
-
-typedef long long int int64;
+#include <stddef.h>
+#include <stdint.h>
 
 struct UTime {
-  long int secs;
-  long int usecs;
+  size_t secs;
+  size_t usecs;
 };
 
 struct NTime {
-  long int secs;
-  long int nsecs;
+  size_t secs;
+  size_t nsecs;
 };
 
 struct Timezone {

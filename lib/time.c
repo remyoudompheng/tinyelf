@@ -7,7 +7,7 @@ void usleep(unsigned long usecs) {
   nanosleep(&t, NULL);
 }
 
-int64 utime() {
+int64_t utime() {
   struct UTime t;
   gettimeofday(&t, NULL);
   return t.secs * 1000000 + t.usecs;

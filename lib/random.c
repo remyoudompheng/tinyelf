@@ -2,7 +2,7 @@
 #include <random.h>
 
 RandGen randinit();
-int64 randnext(RandGen *g);
+int64_t randnext(RandGen *g);
 
 RandGen randinit() {
   RandGen g;
@@ -10,8 +10,8 @@ RandGen randinit() {
   return g;
 }
 
-int64 randnext(RandGen *g) {
-  register int64 ret = g->seed;
+int64_t randnext(RandGen *g) {
+  int64_t ret = g->seed;
   ret = 0x5DEECE66D * ret + 0xB;
   ret &= 0xffffffffffff;
   g->seed = ret;

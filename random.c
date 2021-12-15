@@ -1,9 +1,9 @@
 #include <sys.h>
 #include <random.h>
 
-static int itoa(int64 i, char *buffer) {
+static int itoa(int64_t i, char *buffer) {
   int digits = 0;
-  int64 n;
+  int64_t n;
   char *p;
   for (n = i; n; n /= 10) digits += 1;
   if (i < 0) digits ++;
@@ -22,7 +22,7 @@ int main() {
   char buffer[48];
   RandGen g = randinit();
   int i, size;
-  int64 n;
+  int64_t n;
   int buckets[19];
 
   for(i = 0; i < 3000000; i++) {

@@ -4,10 +4,10 @@
 #include <types.h>
 
 typedef struct  {
-  int64 seed;
+  int64_t seed;
 } RandGen;
 
 RandGen randinit();
-int64 randnext(RandGen *g);
+int64_t randnext(RandGen *g);
 
 #endif

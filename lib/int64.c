@@ -1,13 +1,13 @@
 #if ARCH == i386
 
-#define NULL ((void*)0)
+#include <stddef.h>
+#include <stdint.h>
 
-typedef unsigned int uint;
-typedef unsigned long long int uint64;
+typedef size_t uint;
 
 static void quotrem64(a, b, q, r)
-  uint64 a, b;
-  uint64 *q, *r;
+  uint64_t a, b;
+  uint64_t *q, *r;
 {
   double qfloat;
 
@@ -18,13 +18,13 @@ static void quotrem64(a, b, q, r)
   qfloat = (double)a / (double)b;
   if (b >> 16) {
     // Quotient has less than 48 bits
-    *q = (uint64)qfloat;
+    *q = (uint64_t)qfloat;
     if (r != NULL) *r = a - b * (*q);
   } else {
-    uint64 qapprox, rem;
-    qapprox = (uint64)qfloat;
+    uint64_t qapprox, rem;
+    qapprox = (uint64_t)qfloat;
     rem = a - b * qapprox;
-    *q = qapprox + (uint64)((uint)rem / (uint)b);
+    *q = qapprox + (uint64_t)((uint)rem / (uint)b);
     if (r != NULL) *r = (uint)rem % (uint)b;
   }
 }
@@ -33,24 +33,24 @@ static void quotrem64(a, b, q, r)
 #define ONE_HALF        (ONE_FOURTH * 2.0)
 #define ONE             (ONE_FOURTH * 4.0)
 
-uint64 __fixunsdfdi(double x) {
+uint64_t __fixunsdfdi(double x) {
   double upper = x / ONE;
-  uint64 result = (uint)upper;
+  uint64_t result = (uint)upper;
   result <<= 32;
-  while(result > x) result -= (1<<32);
+  while(result > x) result -= (1ULL<<32);
   x -= (double)result;
   result += (uint)x;
   return result;
 }
 
-uint64 __divdi3(uint64 a, uint64 b) {
-  uint64 q;
+uint64_t __divdi3(uint64_t a, uint64_t b) {
+  uint64_t q;
   quotrem64(a, b, &q, NULL);
   return q;
 }
 
-uint64 __moddi3(uint64 a, uint64 b) {
-  uint64 q, r;
+uint64_t __moddi3(uint64_t a, uint64_t b) {
+  uint64_t q, r;
   quotrem64(a, b, &q, &r);
   return r;
 }

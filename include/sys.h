@@ -12,7 +12,7 @@ void nanosleep(struct NTime *t, struct NTime *rem);
 void usleep(unsigned long usecs);
 
 int gettimeofday(struct UTime *t, struct Timezone *tz);
-int64 utime();
+int64_t utime();
 
 #endif
 
