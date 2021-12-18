@@ -1,4 +1,4 @@
-.text
+.section .text.read
 
 .globl read
 read:
@@ -6,6 +6,8 @@ read:
         movl $0, %eax
         syscall
         ret
+
+.section .text.write
 
 // write(int fd, char *data, int data_len)
 .globl write
@@ -15,11 +17,15 @@ write:
         syscall
         ret
 
+.section .text.ioctl
+
 .globl ioctl
 ioctl:
         movl $16, %eax
         syscall
         ret
+
+.section .text.exit
 
 // exit(int code)
 .globl exit

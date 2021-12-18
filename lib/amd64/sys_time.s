@@ -1,4 +1,4 @@
-.text
+.section .text.select
 
 // select
 //    int n           %edi
@@ -13,12 +13,16 @@ select:
         syscall
         ret
 
+.section .text.nanosleep
+
 // nanosleep(timespec *t, timespec *rem)
 .globl nanosleep
 nanosleep:
         movl $35, %eax
         syscall
         ret
+
+.section .text.gettimeofday
 
 // gettimeofday(timeval *t, timezone *tz)
 .globl gettimeofday

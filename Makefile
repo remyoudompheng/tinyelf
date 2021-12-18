@@ -4,10 +4,11 @@ ARCH = $(shell uname -m)
 CFLAGS = -Os -march=native -std=c11 -pipe -Wall -Wconversion \
 	 -fno-builtin \
 	 -fno-stack-protector \
+	 -ffunction-sections \
 	 -fno-asynchronous-unwind-tables
 CPPFLAGS = -Iinclude
 LD ?= ld.gold
-LDFLAGS = -s -N
+LDFLAGS = -s -N -O3 --gc-sections
 
 ifdef DEBUG
 CFLAGS += -O0 -g -fasynchronous-unwind-tables
