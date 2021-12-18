@@ -1,5 +1,5 @@
-#include <sys.h>
 #include <random.h>
+#include <sys.h>
 
 RandGen randinit();
 int64_t randnext(RandGen *g);
@@ -18,4 +18,3 @@ int64_t randnext(RandGen *g) {
   ret = ret ^ (ret >> 16) ^ (ret >> 32);
   return ret;
 }
-

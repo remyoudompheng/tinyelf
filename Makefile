@@ -40,5 +40,8 @@ all: main.bin mandelbrot.bin random.bin randomline.bin
 stdlib.a: $(LIB_OBJS)
 	ar cru stdlib.a $(LIB_OBJS)
 
+format:
+	clang-format -i *.c
+
 clean:
 	rm -f *.bin *.o lib/*.o lib/*/sys.o stdlib.a
