@@ -3,6 +3,7 @@ ARCH = $(shell uname -m)
 # no-stack-protector: do not attempt to load SSP canary from TLS
 CFLAGS = -Os -march=native -std=c11 -pipe -Wall -Wconversion \
 	 -fno-builtin \
+	 -fno-jump-tables \
 	 -fno-stack-protector \
 	 -ffunction-sections \
 	 -fno-asynchronous-unwind-tables
@@ -29,7 +30,7 @@ endif
 LIB_OBJS = lib/print.o lib/time.o lib/int64.o lib/random.o lib/stub.o
 LIB_OBJS += lib/$(ARCH)/skel.o lib/$(ARCH)/sys.o lib/$(ARCH)/sys_time.o
 
-all: main.bin mandelbrot.bin random.bin randomline.bin
+all: main.bin mandelbrot.bin random.bin randomline.bin tinytris.bin
 
 %.bin: %.o stdlib.a
 	$(LD) $(LDFLAGS) -o $@ $< stdlib.a
