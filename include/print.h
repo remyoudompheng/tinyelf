@@ -10,9 +10,10 @@
            : printint, uint16_t                                                \
            : printuint, uint32_t                                               \
            : printuint, uint64_t                                               \
-           : printuint)(x)
+           : printuint, char*: printstr)(x)
 
 void printint(int64_t n);
 void printuint(uint64_t n);
+void printstr(const char *s);
 
 #endif

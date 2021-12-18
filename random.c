@@ -13,8 +13,7 @@ int main() {
     buckets[n % 19] += 1;
   }
   for (i = 0; i < 19; i++) {
-    char eol = '\n';
     print(buckets[i]);
-    write(1, &eol, 1);
+    print("\n");
   }
 }

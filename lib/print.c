@@ -42,3 +42,13 @@ void printint(int64_t n) {
     printuint((uint64_t)(n));
   }
 }
+
+void printstr(const char *s) {
+  char *p = s;
+  int l = 0;
+  while (*p) {
+    l++;
+    p++;
+  }
+  write(1, s, l);
+}
