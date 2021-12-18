@@ -1,4 +1,4 @@
-#if ARCH == i386
+#if ARCH_386
 
 #include <stddef.h>
 #include <stdint.h>

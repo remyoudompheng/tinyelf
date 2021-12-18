@@ -1,11 +1,14 @@
 ARCH = $(shell uname -m)
 # no-builtin: do not generate memcpy() calls
 # no-stack-protector: do not attempt to load SSP canary from TLS
+# no-unwind-tables: avoid eh_frame sections on AArch64
+# no-asynchronous-unwind-tables: avoid eh_frame sections
 CFLAGS = -Os -march=native -std=c11 -pipe -Wall -Wconversion \
 	 -fno-builtin \
 	 -fno-jump-tables \
 	 -fno-stack-protector \
 	 -ffunction-sections \
+	 -fno-unwind-tables \
 	 -fno-asynchronous-unwind-tables
 CPPFLAGS = -Iinclude
 LD ?= ld.gold
@@ -17,13 +20,13 @@ LDFLAGS =
 endif
 
 ifeq ($(ARCH), i686)
-    CPPFLAGS += -DARCH=i386
+    CPPFLAGS += -DARCH_386
 else ifeq ($(ARCH), aarch64)
-    CPPFLAGS += -DARCH=aarch64
+    CPPFLAGS += -DARCH_aarch64
 else
     CFLAGS += -m64
     LDFLAGS += -melf_x86_64
-    CPPFLAGS += -DARCH=amd64
+    CPPFLAGS += -DARCH_amd64
     ARCH = amd64
 endif
 
