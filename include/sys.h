@@ -6,7 +6,7 @@
 int read(int fd, const char *buffer, int size);
 int write(int fd, const char *buffer, int size);
 int ioctl(int fd, int cmd, void *args);
-void exit(int code);
+_Noreturn void exit(int code);
 
 int select(int n, void *r, void *w, void *e, struct UTime *tv);
 
