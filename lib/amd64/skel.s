@@ -4,6 +4,5 @@
 _start:
         call main
         mov %rax, %rdi
-        mov $231, %eax
-        syscall
+        call exit
 
